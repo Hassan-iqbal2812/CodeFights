@@ -1,12 +1,12 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include <malloc.h>
-#include <process.h>
+#include <stdlib.h>
 
 typedef struct node
 {
     int Number;
     struct node *next;
+    int length;
 } node;
 
 int ChartoString(const char *test[], int index)
@@ -73,7 +73,8 @@ node *createLinkeList(int NodesToBeCreated, const char *test[])
     {
         printf("No Args been Passed");
     }
-
+    NodeLinkedList->length = NodesToBeCreated;
+    
     return NodeLinkedList;
 }
 
@@ -81,6 +82,7 @@ bool IterateThroughLinkedList(node IterList)
 {
     bool res = true;
     int Value1, Value2;
+
     for (; IterList.next != NULL; IterList = *IterList.next)
     {
         if (IterList.next != NULL)
@@ -113,12 +115,10 @@ int main(int argc, const char *argv[])
     if (argc > 1)
     {
         LinkedList1 = createLinkeList(argc, argv);
-
         IterateThroughLinkedList(*LinkedList1);
     }
     else
     {
         printf("No arg has been added in");
     }
-    system("pause");
 }
