@@ -73,37 +73,52 @@ node *createLinkeList(int NodesToBeCreated, const char *test[])
     {
         printf("No Args been Passed");
     }
-    NodeLinkedList->length = NodesToBeCreated;
+    NodeLinkedList->length = NodesToBeCreated  - 1;
     
     return NodeLinkedList;
 }
 
+
+bool checkingNodes(node Nodetoskip)
+{
+    return true;
+}
+
+
 bool IterateThroughLinkedList(node IterList)
 {
     bool res = true;
-    int Value1, Value2;
-
-    for (; IterList.next != NULL; IterList = *IterList.next)
-    {
-        if (IterList.next != NULL)
-        {
-            Value1 = IterList.Number;
-            Value2 = IterList.next->Number;
-            printf("What is value 1 = %d \n", Value1);
-            printf("What is value 2 = %d \n", Value2);
-
-            if (Value1 <= Value2)
+    int LengthOfNodelist = IterList.length;
+    node tempIterList = IterList;
+    for (int countz = 0; countz < LengthOfNodelist ; countz++)
+    {        
+            if (IterList.next != NULL)
             {
-                printf("Correct\n");
+                node value1IterList = IterList;
+                for(int i = 0; i < LengthOfNodelist; i++)
+                {
+                    if(i == countz)
+                    {
+                        value1IterList = * value1IterList.next;
+                    }
+                    if(value1IterList.next != NULL)
+                    {
+                        int value1 = value1IterList.Number;
+                        printf("What is value1 %d\n",value1);
+                        value1IterList = * value1IterList.next; // this is the problem it is our whole way of moving through linked list
+                    }
+                    else
+                    {
+                        printf("---------FINISHED---------");
+                        break;
+                    }
+                }
+                tempIterList = * tempIterList.next;
             }
             else
             {
-                printf("FALSE\n");
-                printf("No ascending order\n");
-                res = false;
-                break;
+                printf("We are at the end\n");
             }
-        }
     }
     return res;
 }
